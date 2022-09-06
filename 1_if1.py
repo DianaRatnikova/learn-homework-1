@@ -14,12 +14,63 @@
 
 """
 
-def main():
-    """
-    Эта функция вызывается автоматически при запуске скрипта в консоли
-    В ней надо заменить pass на ваш код
-    """
-    pass
+what_to_do = [' - Да быть такого не может', # 0 - меньшне 2
+              ' - Пора в ясли!',            # 1 - от 2 до 3
+              ' - Иди в сад :)',            # 2 - от 3 до 6
+              ' - Учись в школе',           # 3 - от 7 до 16
+              ' - Ботай в  ВУЗе',           # 4 - от 16 до 22
+              ' - Можно и поработать',      # 5 - от 22 до 65
+              ' - Хватит работать, пора на пенсию'#6 - больше 65
+              ]
 
-if __name__ == "__main__":
-    main()
+#Вопрос 1: записываю результат работы в переменную, тк это сказано в задаче.
+# Но не проще ли сделать на каждый случай return?
+def check_age(age):
+    age_str='Возраст '
+    if age<2:
+        rez='{}{}{}'.format(age_str, age, what_to_do[0])
+    elif 2<= age <3:
+        rez='{}{}{}'.format(age_str,age, what_to_do[1])
+    elif 3<= age <=6:
+        rez='{}{}{}'.format(age_str,age, what_to_do[2])
+    elif 7<=age<16:
+        rez='{}{}{}'.format(age_str,age, what_to_do[3])
+    elif 16<=age<22:
+        rez='{}{}{}'.format(age_str,age, what_to_do[4])
+    elif 22<=age<65:
+        rez='{}{}{}'.format(age_str,age, what_to_do[5])
+    elif age>=65:
+        rez='{}{}{}'.format(age_str,age, what_to_do[6])
+    return rez
+
+
+def main():
+    age=input("Введите Ваш возраст:")
+    while type(age)!=int:
+        try:
+            age=int(age)
+            print(check_age(age))
+            break
+        except ValueError:
+            print("Введите число!")
+            age=input("Введите Ваш возраст:")
+
+
+# Вопрос2: корректно ли для цикла ставить условие <  while (ValueError):  > ?
+#Выглядит лаконичнее, тк не дублируется строка     < age=input("Введите Ваш возраст:") >
+def main1():
+    while (ValueError):
+        try:
+            age=input("Введите Ваш возраст:")
+            age=int(age)
+            print(check_age(age))
+            break
+        except ValueError:
+            print("Введите число!")
+
+
+main()
+
+#Вопрос 3: это что за штуки?
+#if __name__ == "__main__":
+#    main()
