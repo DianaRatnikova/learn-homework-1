@@ -22,24 +22,21 @@ phones_sold=  [
     {'product': 'Samsung Galaxy 21', 'items_sold': [343, 390, 238, 437, 214, 494, 441, 518, 212, 288, 272, 247]},
   ]
 
-# суммарное/среднее количество продаж для каждого товара
-def sold_total_avg(items_sold, flag):
-    sum=0
-    for i in range(len(items_sold)):
-        sum+=items_sold[i]
-    if flag=="TOTAL":
-        return sum
-    elif flag=="AVG":
-        return sum/len(items_sold)
-    else:
-        return -1
+
+# суммарноеколичество продаж для каждого товара
+def total(items_sold):
+    return sum(items_sold)
+
+# среднее количество продаж для каждого товара
+def avg(items_sold):
+    return sum(items_sold)/len(items_sold)
 
 
 def print_phones(phones_sold):
     for phone in phones_sold:
         print('product:      ', phone['product'])
         print('sold_total:   ', phone['sold_total'])
-        print('sold_average:  {:.6}'.format(phone['sold_average']))
+        print(f"sold_average:  {sold_average:.6f}")
         print("------------------------")
 
 
@@ -47,8 +44,8 @@ def main():
     sale_for_all_total=0
     sale_for_all_avg=0
     for phone in phones_sold:
-        phone['sold_total']=sold_total_avg(phone['items_sold'], 'TOTAL')
-        phone['sold_average']=sold_total_avg(phone['items_sold'], 'AVG')
+        phone['sold_total']=total(phone['items_sold'])
+        phone['sold_average']=avg(phone['items_sold'])
         sale_for_all_total+=phone['sold_total']
         sale_for_all_avg+=phone['sold_average']
     sale_for_all_avg=sale_for_all_avg/len(phones_sold)
@@ -59,5 +56,4 @@ def main():
     pass
     
 if __name__ == "__main__":
-    print()
     main()
