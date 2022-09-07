@@ -15,16 +15,20 @@
     
 """
 
-answers_dict = {"Как дела?": "Хорошо!", "Что делаешь?": "Программирую", "Когда отпуск?": "Не знаю"}
+ANSWERS_DICT = {
+    "Как дела?": "Хорошо!",
+    "Что делаешь?": "Программирую",
+    "Когда отпуск?": "Не знаю",
+    "1": "ONE"
+}
 
-def ask_user(answers_dict):
-    while True:
+
+def ask_user():
+    question=''
+    while not ANSWERS_DICT.get(question):
         question=input('Задайте мне вопрос: ')
-        for q in answers_dict:
-            if q==question:
-                print(answers_dict[question])
-                return False  #почему-то break не обеспечивает выход
+        print(ANSWERS_DICT.get(question, "НихтФерштейн"))
 
 
 if __name__ == "__main__":
-    ask_user(answers_dict)
+    ask_user()
