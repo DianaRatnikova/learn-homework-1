@@ -28,19 +28,19 @@ what_to_do = [' - Да быть такого не может', # 0 - меньш�
 def check_age(age):
     age_str='Возраст '
     if age<2:
-        rez='{}{}{}'.format(age_str, age, what_to_do[0])
+        rez=f'{age_str}{age}{what_to_do[0]}'
     elif 2<= age <3:
-        rez='{}{}{}'.format(age_str,age, what_to_do[1])
+        rez=f'{age_str}{age}{what_to_do[1]}'
     elif 3<= age <=6:
-        rez='{}{}{}'.format(age_str,age, what_to_do[2])
+        rez=f'{age_str}{age}{what_to_do[2]}'
     elif 7<=age<16:
-        rez='{}{}{}'.format(age_str,age, what_to_do[3])
+        rez=f'{age_str}{age}{what_to_do[3]}'
     elif 16<=age<22:
-        rez='{}{}{}'.format(age_str,age, what_to_do[4])
+        rez=f'{age_str}{age}{what_to_do[4]}'
     elif 22<=age<65:
-        rez='{}{}{}'.format(age_str,age, what_to_do[5])
+        rez=f'{age_str}{age}{what_to_do[5]}'
     elif age>=65:
-        rez='{}{}{}'.format(age_str,age, what_to_do[6])
+        rez=f'{age_str}{age}{what_to_do[6]}'
     return rez
 
 
