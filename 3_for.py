@@ -53,8 +53,8 @@ def main():
         sale_for_all_avg+=phone['sold_average']
     sale_for_all_avg=sale_for_all_avg/len(phones_sold)
     print_phones(phones_sold)
-    print("SOLD IN TOTAL:   {}".format(sale_for_all_total))
-    print("SOLD IN AVERAGE: {}".format(sale_for_all_avg))
+    print(f"SOLD IN TOTAL:   {sale_for_all_total}")
+    print(f"SOLD IN AVERAGE: {sale_for_all_avg}")
 
     pass
     
