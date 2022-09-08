@@ -1,3 +1,5 @@
+
+
 """
 
 Домашнее задание №1
@@ -24,41 +26,74 @@ what_to_do = [
     ' - Хватит работать, пора на пенсию'#6 - больше 65
      ]
 
-
-def age_conclusion(age):
-    age_str='Возраст '
+'''
+Вопрос:
+корректнее использовать функцию с what_to_do_index (см ниже)
+или с вытаскиванием сообщений по каждому if?  
+'''
+def age_compose_conclusion_1(age): #не использую эту функцию, тк кажется менее красивой
+    age_str = 'Возраст '
+    what_to_do_msg = ''
     if age < 2:
-        age_message=f'{age_str}{age}{what_to_do[0]}'
+        what_to_do_msg = what_to_do[0]
     elif age < 3:
-        age_message=f'{age_str}{age}{what_to_do[1]}'
+        what_to_do_msg = what_to_do[1]
     elif age <= 6:
-        age_message=f'{age_str}{age}{what_to_do[2]}'
+        what_to_do_msg = what_to_do[2]
     elif 7 <= age < 16:
-        age_message=f'{age_str}{age}{what_to_do[3]}'
+        what_to_do_msg = what_to_do[3]
     elif age < 22:
-        age_message=f'{age_str}{age}{what_to_do[4]}'
+        what_to_do_msg = what_to_do[4]
     elif age < 65:
-        age_message=f'{age_str}{age}{what_to_do[5]}'
+        what_to_do_msg = what_to_do[5]
     elif age >= 65:
-        age_message=f'{age_str}{age}{what_to_do[6]}'
+        what_to_do_msg = what_to_do[6]
+    age_message=f'{age_str}{age}{what_to_do_msg}'
     return age_message
 
 
+
+def age_compose_conclusion(age): #использую эту. Ведь она лучше?
+    age_str = 'Возраст '
+    what_to_do_msg = ''
+    if age < 2:
+        what_to_do_index = 0
+    elif age < 3:
+        what_to_do_index = 1
+    elif age <= 6:
+        what_to_do_index = 2
+    elif 7 <= age < 16:
+        what_to_do_index = 3
+    elif age < 22:
+        what_to_do_index = 4
+    elif age < 65:
+        what_to_do_index = 5
+    elif age >= 65:
+        what_to_do_index = 6
+    age_message=f'{age_str}{age}{what_to_do_msg[what_to_do_index]}'
+    return age_message
+
+'''
+ Вопрос: тк хочется дать норм ответ, 
+ когда пользователь вводит 0, 
+ не могу запихнуть в return введённое значение (чтобы не возвращал ноль).
+ Ввожу глобальную переменную. Это классная идея, или не очень?
+'''
 def age_raw_convert_to_int(age_raw):
-    if type(age_raw)!=int:
-        try:
-            age_int=int(age_raw)
-            return age_int
-        except ValueError:
-            print("Введите число!")
-            return 0
+    try:
+      global AGE_INT
+      AGE_INT = int(age_raw)
+      return 1
+    except ValueError:
+        print("Введите число!")
+        return 0
 
 
 def main():
-    age_raw=input("Введите Ваш возраст:")
+    age_raw = input("Введите Ваш возраст: ")
     while not age_raw_convert_to_int(age_raw):
-            age_raw=input("Введите Ваш возраст:")
-    print(age_conclusion(age_raw_convert_to_int(age_raw)))
+        age_raw = input("Введите Ваш возраст: ")
+    print(age_compose_conclusion(AGE_INT))
 
 if __name__ == "__main__":
     main()
