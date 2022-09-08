@@ -70,7 +70,7 @@ def age_compose_conclusion(age): #использую эту. Ведь она л�
         what_to_do_index = 5
     elif age >= 65:
         what_to_do_index = 6
-    age_message=f'{age_str}{age}{what_to_do_msg[what_to_do_index]}'
+    age_message=f'{age_str}{age}{what_to_do[what_to_do_index]}'
     return age_message
 
 '''
