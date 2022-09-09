@@ -13,28 +13,29 @@
     
 """
 
-
+def final_price_count(price_float, discount_value):
+    return price_float*(1-discount_value/100)
 
 def discounted(price, discount, max_discount=20):
     try:
         price_float = float(price)
         discount_float = float(discount)
         max_discount_float = int(max_discount)
-    except (TypeError, ValueError):
+    except (ValueError):
         print("Ошибка типов")
         return "Err"
 
     if max_discount_float >= 100:
         raise ValueError("Слишком большая максимальная скидка")
+
     if discount_float >= max_discount_float:
-        final_price = price_float*(1-max_discount_float/100)
+         final_price = final_price_count(price_float, max_discount_float)
     else:
-        final_price = price_float*(1-discount_float/100)
+        final_price = final_price_count(price_float, discount_float)
     return final_price
 
 
 if __name__ == "__main__":
-    print("7.", discounted(100.0, 5, 1000))
     print("1.", discounted(100, 2))
     print("2.", discounted(100, "3"))
     print("3.", discounted("100", "4.5"))
