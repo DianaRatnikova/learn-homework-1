@@ -27,11 +27,15 @@ def discounted(price, discount, max_discount=20):
 
     if max_discount_float >= 100:
         raise ValueError("Слишком большая максимальная скидка")
-
-    if discount_float >= max_discount_float:
-         final_price = final_price_count(price_float, max_discount_float)
+        
+    actual_discount = 0
+    if discount_float >= max_discount_float:      
+        actual_discount = max_discount_float
     else:
-        final_price = final_price_count(price_float, discount_float)
+        actual_discount = discount_float
+
+    final_price = final_price_count(price_float, actual_discount)
+
     return final_price
 
 
