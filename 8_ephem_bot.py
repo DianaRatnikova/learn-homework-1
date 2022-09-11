@@ -17,6 +17,7 @@ from datetime import datetime
 import logging
 import settings
 import ephem
+import ephem_dict
 
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
 
@@ -24,60 +25,27 @@ logging.basicConfig(format ='%(name)s - %(levelname)s - %(message)s',
                     level = logging.INFO,
                     filename = 'bot.log')
 
-
-PROXY = {
-    'proxy_url': 'socks5://t1.learn.python.ru:1080',
-    'urllib3_proxy_kwargs': {
-        'username': 'learn',
-        'password': 'python'
-    }
-}
-
-planets_names = ['Sun', 'Moon', 'Mercury', 'Venus', 'Mars', 'Jupiter', 'Saturn', 'Uranus', 'Neptune', 'Pluto']
-
 def greet_user(update, context):
     text = 'Вызван /start'
-    print(text)
+    logging.info("==Command /start")
     update.message.reply_text(text)
 
 
 def get_planet(update, context):
-    planet_request = 'Введите одно из названий планет:'
-    print(planet_request)
-    for planet_variant in planets_names:
-      planet_request +='\n' + planet_variant
-    update.message.reply_text(planet_request)
+    planet_request = 'Введите одно из названий планет:\n'
+    logging.info("==Command /planet")
+    update.message.reply_text(planet_request+ '\n'.join(ephem_dict.planets_names))
 
 
 def date_today():
-    dt_now = datetime.now()
-    dt_for_constellation = dt_now.strftime('%Y/%m/%d %H:%M')
-    return dt_for_constellation
+    return datetime.now().strftime('%Y/%m/%d %H:%M')
 
 
 def desipher_planet(user_planet):
-  if user_planet.lower() == 'sun':
-    planet = ephem.Sun()
-  elif user_planet.lower() == 'moon':
-    planet = ephem.Moon()
-  elif user_planet.lower() == 'mercury':
-    planet = ephem.Mercury()
-  elif user_planet.lower() == 'venus':
-    planet = ephem.Venus()    
-  elif user_planet.lower() == 'mars':
-    planet = ephem.Mars()
-  elif user_planet.lower() == 'jupiter':
-    planet = ephem.Jupiter()
-  elif user_planet.lower() == 'saturn':
-    planet = ephem.Saturn()
-  elif user_planet.lower() == 'uranus':
-    planet = ephem.Uranus()
-  elif user_planet.lower() == 'neptune':
-    planet = ephem.Neptune()
-  elif user_planet.lower() == 'pluto':
-    planet = ephem.Pluto()
+  if user_planet.lower() in ephem_dict.planets_ephem:
+    planet = ephem_dict.planets_ephem[user_planet.lower()]
   else:
-    planet=None
+    planet = None
   return planet
 
 
