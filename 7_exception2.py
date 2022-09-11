@@ -21,13 +21,13 @@ def discounted(price, discount, max_discount=20):
         price_float = float(price)
         discount_float = float(discount)
         max_discount_float = int(max_discount)
-    except (ValueError):
+    except ValueError:
         print("Ошибка типов")
         return "Err"
 
     if max_discount_float >= 100:
         raise ValueError("Слишком большая максимальная скидка")
-        
+
     actual_discount = 0
     if discount_float >= max_discount_float:      
         actual_discount = max_discount_float
